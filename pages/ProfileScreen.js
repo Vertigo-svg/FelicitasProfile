@@ -1,19 +1,30 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, StatusBar } from 'react-native';
-import ProfileHeader from '../components/ProfileHeader'; // Importing from components folder
-import ProfileOption from '../components/ProfileOption'; // Importing from components folder
-import { MaterialCommunityIcons } from '@expo/vector-icons'; // Importing icons
+import { View, StyleSheet, Text, StatusBar, Alert } from 'react-native';
+import ProfileHeader from '../components/ProfileHeader';
+import ProfileOption from '../components/ProfileOption';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const ProfileScreen = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true); // Default is dark mode
+const ProfileScreen = ({ navigation }) => {
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const toggleDarkMode = () => setIsDarkMode(previousState => !previousState);
+
+  // Sign-out handler
+  const handleSignOut = async () => {
+    try {
+      await AsyncStorage.removeItem('userToken'); 
+      navigation.navigate('Login'); 
+    } catch (error) {
+      Alert.alert('Error', 'Failed to sign out. Please try again.');
+    }
+  };
 
   return (
     <View style={[styles.container, isDarkMode ? styles.darkBackground : styles.lightBackground]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ProfileHeader isDarkMode={isDarkMode} />
-      
+
       {/* User Stats */}
       <View style={styles.statsContainer}>
         <Text style={[styles.statText, isDarkMode ? styles.darkText : styles.lightText]}>230K</Text>
@@ -35,7 +46,7 @@ const ProfileScreen = () => {
         <ProfileOption title="Notifications" icon="bell" isDarkMode={isDarkMode} />
         <ProfileOption title={isDarkMode ? "Light Mode" : "Dark Mode"} icon="moon-waning-crescent" 
           isDarkMode={isDarkMode} rightComponent={<MaterialCommunityIcons name={isDarkMode ? "moon-waning-crescent" : "white-balance-sunny"} size={24} color={isDarkMode ? '#fff' : '#000'} />} onPress={toggleDarkMode} />
-        <ProfileOption title="Sign Out" icon="sign-out" isDarkMode={isDarkMode} />
+        <ProfileOption title="Sign Out" icon="sign-out" isDarkMode={isDarkMode} onPress={handleSignOut} />
       </View>
     </View>
   );
@@ -62,7 +73,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#00FF00',
-    paddingHorizontal: 10, // Added padding for spacing
+    paddingHorizontal: 10,
   },
   statLabel: {
     color: '#333',
@@ -79,7 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginVertical: 10,
-    textAlign: 'left', // Align text to the left
+    textAlign: 'left',
   },
   darkText: {
     color: '#fff',
