@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 const PassRecovery = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      {/* Logo */}
+      <Image source={require('../assets/bg1.jpg')} style={styles.logo} />
+
       <Text style={styles.header}>Find Your Account</Text>
       <Text style={styles.subHeader}>Enter your mobile number or email</Text>
       
@@ -32,6 +35,14 @@ const styles = StyleSheet.create({
     padding: 16,
     justifyContent: 'center',
     backgroundColor: '#6A1E55',
+  },
+  logo: {
+    width: 100,      
+    height: 100,     
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    marginBottom: 16,
+    borderRadius: 50,
   },
   header: {
     fontSize: 24,

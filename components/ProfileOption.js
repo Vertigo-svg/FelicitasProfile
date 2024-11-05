@@ -5,23 +5,28 @@ import { FontAwesome } from '@expo/vector-icons';
 const ProfileOption = ({ title, icon, isDarkMode, rightComponent, onPress }) => {
   return (
     <TouchableOpacity
-      style={[styles.option, isDarkMode ? styles.darkOption : styles.lightOption]}
-      onPress={onPress} // Add onPress prop to handle clicks
+      style={[
+        styles.option,
+        isDarkMode ? styles.darkOption : styles.lightOption,
+      ]}
+      onPress={onPress}
+      activeOpacity={0.8}
     >
-      {/* Left component (Toggle switch or icon) */}
+      {/* Left Icon */}
       <View style={styles.leftComponent}>
-        {rightComponent ? rightComponent : <FontAwesome name={icon} size={24} color={isDarkMode ? 'white' : 'black'} />}
+        {rightComponent ? (
+          rightComponent
+        ) : (
+          <FontAwesome name={icon} size={24} color={isDarkMode ? 'white' : 'black'} />
+        )}
       </View>
 
-      {/* Center the text */}
+      {/* Title Text */}
       <Text style={[styles.optionText, isDarkMode ? styles.darkText : styles.lightText]}>
         {title}
       </Text>
 
-      {/* Right icon (optional chevron) */}
-      {!rightComponent && (
-        <FontAwesome name="chevron-right" size={24} color={isDarkMode ? 'white' : 'black'} />
-      )}
+      {/* Right Chevron removed */}
     </TouchableOpacity>
   );
 };
@@ -30,31 +35,42 @@ const styles = StyleSheet.create({
   option: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between', // Ensures proper spacing between elements
-    paddingVertical: 15, // Vertical padding for the touch area
-    paddingHorizontal: 20, // Horizontal padding for the touch area
-    borderBottomWidth: 1,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginVertical: 6,
+    marginHorizontal: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 3,
   },
   darkOption: {
-    borderBottomColor: '#333',
+    backgroundColor: '#333',
+    borderBottomColor: '#555',
   },
   lightOption: {
-    borderBottomColor: '#ccc',
+    backgroundColor: '#f0f0f0',
+    borderBottomColor: '#ddd',
   },
   optionText: {
-    flex: 1, // Ensures the text takes the available space
-    fontSize: 18,
-    textAlign: 'center', // Center the text
+    flex: 1,
+    fontSize: 16,
+    fontWeight: '500',
+    textAlign: 'left',
+    marginLeft: 10,
   },
   darkText: {
     color: 'white',
   },
   lightText: {
-    color: 'black',
+    color: '#333',
   },
   leftComponent: {
-    marginRight: 10, // Adds space between the left component and the text
-    justifyContent: 'center', // Center the icon vertically
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 30,
   },
 });
 
