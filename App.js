@@ -3,7 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProfileScreen from './pages/ProfileScreen';
 import LoginPage from './components/Login';
-import SignupPage from './components/Signup';  // Import SignupPage
+import SignupPage from './components/Signup'; 
+import PassRecovery from './components/PassRecovery';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,11 @@ const App = () => {
         <Stack.Screen 
           name="Signup" 
           component={SignupPage} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="PassRecovery" 
+          component={PassRecovery} 
           options={{ headerShown: false }} 
         />
       </Stack.Navigator>

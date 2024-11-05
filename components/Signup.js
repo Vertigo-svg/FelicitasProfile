@@ -9,7 +9,7 @@ const SignupPage = ({ navigation }) => {
 
     const handleSignUp = () => {
         // Add signup logic here
-        alert('Sign Up button pressed');
+        alert('Signed Up Successfully!');
     };
 
     return (

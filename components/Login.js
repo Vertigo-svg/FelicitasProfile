@@ -72,7 +72,10 @@ const LoginPage = ({ navigation }) => {
                     )}
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.forgotPasswordButton}>
+                <TouchableOpacity 
+                    style={styles.forgotPasswordButton} 
+                    onPress={() => navigation.navigate('PassRecovery')}  // Navigate to PassRecovery
+                >
                     <Text style={styles.forgotPasswordText}>Forgot password?</Text>
                 </TouchableOpacity>
 
